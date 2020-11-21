@@ -1,24 +1,56 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column            | Type   | Options     |
+| --------          | ------ | ----------- |
+| nickname          | string | null: false |
+| email             | string | null: false |
+| password          | string | null: false |
+|full_name          | string | null: false |
+|full_name_katakana | string | null: false |
+|birthday           | string |null:false   |
+### Association
 
-* Ruby version
+- has_one :purchase
+- has_many :items
 
-* System dependencies
+## itemsテーブル
 
-* Configuration
+| Column             |        Type     | Options                       |
+| ---------          | ---------       | ------------------------------|  
+| title              | string          |       null: false             |
+|description of item | text            |       null: false             |
+|category            | text            |       null: false             |
+|product_condition   |text             |   null: false                 |
+|shipping_charges    |text             |       null: false             |
+|shipping_area       |text             |      null:  false             |
+|days_to_sip         |text             |      null:   false            |
+|selling_price       |integer          |     null:   false             |
+| user               |references       | null: false, foreign_key: true|
 
-* Database creation
+### Association
 
-* Database initialization
+- belongs_to :user
+- has_one    :purchase
 
-* How to run the test suite
+## purchase テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column  | Type       |Options                         |
+| --------| ---------- | ------------------------------ |
+| user    | references | null: false, foreign_key: true |
+|item     | references | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
+- belongs_one :user
+- belongs_one :buyer_address
 
-* ...
+## buyer_address テーブル
+
+| Column         | Type       |Options        |
+| -------        | ---------- | --------------|
+| postal_code    | text       | null: false   |
+|municipalities  | text       | null: false   |
+|address         |  text      | null: false   |
+|building_name   |  text      | null: false   |
+|phone_number    |   text     | null:  false  |
