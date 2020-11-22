@@ -5,16 +5,16 @@
 | Column            | Type   | Options     |
 | --------          | ------ | ----------- |
 | nickname          | string | null: false |
-| email             | string | null: false |
-| password          | string | null: false |
+| email             | string | null: false, unique: true |
+| password          | string | null: false, unique: true |
 |encrypted_password | string | null: false |
 |family_name        | string | null: false |
 |first_name         | string | null: false |
 |full_name_katakana | string | null: false |
-|birthday           |datetime|null:false   |
+|birthday           |date    |null:false   |
 ### Association
 
-- belongs_to :purchase
+- has_many :purchases
 - has_many :items
 
 ## itemsテーブル
@@ -52,7 +52,7 @@
 
 | Column            | Type       |Options        |
 | ------------------|----------- | --------------|
-| postal_code       | integer    | null: false   |
+| postal_code       | string    | null: false   |
 | prefectures_id    | integer    | null: false   |
 |municipalities     | string     |  null: false   |
 |address            | string     | null: false   |
