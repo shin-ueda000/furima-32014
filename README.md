@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column            | Type   | Options     |
-| --------          | ------ | ----------- |
-| nickname          | string | null: false |
-| email             | string | null: false, unique: true |
-| password          | string | null: false, unique: true |
-|encrypted_password | string | null: false |
-|family_name        | string | null: false |
-|first_name         | string | null: false |
-|full_name_katakana | string | null: false |
-|birthday           |date    |null:false   |
+| Column              | Type   | Options     |
+| --------------------| ------ | ----------- |
+| nickname            | string | null: false |
+| email               | string | null: false, unique: true |
+|encrypted_password   | string | null: false |
+|family_name          | string | null: false |
+|first_name           | string | null: false |
+|family_name_katakana | string | null: false |
+|first_name_katakana  | string | null: false |
+|birthday             |date    |null:false   |
 ### Association
 
 - has_many :purchases
