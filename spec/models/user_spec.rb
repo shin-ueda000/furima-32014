@@ -57,11 +57,33 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password please include both letters and numbers in.")
       end
+      it "passwordが英字のみの場合登録できない" do
+        @user.password = "aaaaaa"
+        @user.password_confirmation = "aaaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password please include both letters and numbers in.")
+      end
+      it "passwordが数字のみの場合登録できない" do
+        @user.password = "111111"
+        @user.password_confirmation = "111111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password please include both letters and numbers in.")
+      end
       it "passwordとpassword_confirmationが不一致では登録できないこと" do
         @user.password = "a000000"
         @user.password_confirmation = "a100000"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it "名字、全角（漢字・ひらがな・カタカナ）での入力が空だと登録出来ない" do
+        @user.family_name = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name can't be blank")
+      end
+      it "名前、全角（漢字・ひらがな・カタカナ）での入力が空だと登録出来ない" do
+        @user.first_name = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name can't be blank")
       end
       it "名字、全角（漢字・ひらがな・カタカナ）での入力が必須であること" do
         @user.family_name = "yamada"
@@ -73,6 +95,16 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name Input in full-width (kanji, hiragana, katakana) is required")
       end
+      it "名字のフリガナは、全角（カタカナ）での入力が空だと登録出来ない" do
+        @user.first_name = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name can't be blank")
+      end
+        it "名前のフリガナは、全角（カタカナ）での入力が空だと登録出来ない" do
+          @user.first_name = nil
+          @user.valid?
+          expect(@user.errors.full_messages).to include("First name can't be blank")
+        end
       it "名字のフリガナは、全角（カタカナ）での入力が必須である" do
         @user.family_name_katakana = "山田"
         @user.valid?
