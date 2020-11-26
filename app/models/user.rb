@@ -13,4 +13,7 @@ class User < ApplicationRecord
          validates :first_name_katakana,   format: { with:/\A[ァ-ヶー－]+\z/, message: "Frigana must be entered in full-width (katakana)"}
          validates :birthday
          end
+         
+         has_many :items
 end
+

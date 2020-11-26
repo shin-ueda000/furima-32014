@@ -24,12 +24,12 @@
 | title              | string          |       null: false             |
 |description_of_item | text            |       null: false             |
 |category_id         | integer         |       null: false             |
-|product_condition_id| integer         |   null: false                 |
-|shipping_charges_id | integer         |       null: false             |
+|product_condition_id| integer         |       null: false             |
+|shipping_charge_id | integer         |       null: false             |
 |shipping_area_id    | integer         |      null:  false             |
 |days_to_sip_id      | integer         |      null:   false            |
-|selling_price       | integer          |     null:   false             |
-| user               |references       | null: false, foreign_key: true|
+|selling_price       | integer         |     null:   false             |
+| user               |references       |      foreign_key: true        |
 
 ### Association
 
