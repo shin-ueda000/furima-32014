@@ -4,7 +4,10 @@ FactoryBot.define do
     shipping_area_id { 3 }
     municipalities { '横浜市緑区' }
     address { '青山１−１' }
+    building_name {'柳ビル103'}
     phone_number { '00000000000' }
     token {"tok_abcdefghijk00000000000000000"}
+    user_id {1}
+    item_id {1}
   end
 end

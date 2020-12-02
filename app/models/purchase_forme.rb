@@ -9,6 +9,8 @@ class PurchaseForme
     validates :address
     validates :phone_number, format: {with: /\A\d{10,11}\z/, message: "Too long too short,is invalid"}
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
 

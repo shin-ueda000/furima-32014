@@ -10,6 +10,10 @@ RSpec.describe PurchaseForme, type: :model do
       it "全ての値が、正しく入力されている時" do
         expect(@purchase_forme).to be_valid
       end
+      it "建物名が空でも保存できる" do
+        @purchase_forme.building_name = ""
+        expect(@purchase_forme).to be_valid
+      end
     end
 
     context '商品の購入ができない時' do
@@ -57,6 +61,16 @@ RSpec.describe PurchaseForme, type: :model do
         @purchase_forme.phone_number = "000000000000"
         @purchase_forme.valid?
         expect(@purchase_forme.errors.full_messages).to include("Phone number Too long too short,is invalid")
+      end
+      it "user_idが空では登録できないこと" do
+        @purchase_forme.user_id = nil
+        @purchase_forme.valid?
+        expect(@purchase_forme.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idが空では登録できないこと" do
+        @purchase_forme.item_id = nil
+        @purchase_forme.valid?
+        expect(@purchase_forme.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
