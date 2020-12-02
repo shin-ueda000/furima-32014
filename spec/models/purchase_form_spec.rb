@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe PurchaseForme, type: :model do
   before do
     @purchase_forme = FactoryBot.build(:purchase_forme)
+    
   end
 
   describe '購入機能' do
