@@ -21,7 +21,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :days_to_sip
 
   has_one_attached :image
-
+  has_one    :purchase
   belongs_to :user
 
 end
