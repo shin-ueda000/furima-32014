@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :purchase_form_set, only: [:index, :create]
   def index
     @purchase_form = PurchaseForme.new
-    @item = Item.find(params[:item_id])
     if current_user.id == @item.user_id || @item.purchase != nil
       redirect_to root_path 
     end
@@ -10,7 +10,6 @@ class OrdersController < ApplicationController
 
   def create
     @purchase_form = PurchaseForme.new(orders_params)
-    @item = Item.find(params[:item_id])
     if @purchase_form.valid?
       pay_item
       @purchase_form.save
@@ -33,6 +32,10 @@ class OrdersController < ApplicationController
       card:   params[:token],
       currency: 'jpy' 
     )
+  end
+
+  def purchase_form_set
+    @item = Item.find(params[:item_id])
   end
 end
 
