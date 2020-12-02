@@ -9,9 +9,11 @@
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <%# <div class='sold-out'>
+      <%if @item.purchase != nil%>
+      <div class='sold-out'>
         <span>Sold Out!!</span>
-      </div> %>
+      </div> 
+      <%end%>
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
@@ -29,9 +31,9 @@
         <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
         <p class='or-text'>or</p>
         <%= link_to '削除', item_path, method: :delete, class:'item-destroy' %>
-      <% else %>
         <%# 商品が売れていない場合はこちらを表示しましょう %>
-        <%= link_to '購入画面に進む', item_path ,class:"item-red-btn"%>
+      <% elsif @item.purchase == nil %>
+        <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
       <% end %>
     <% end %>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
@@ -105,7 +107,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class='another-item'><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href = "#" class='another-item'><%= @item.category.name %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
