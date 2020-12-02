@@ -37,6 +37,11 @@ RSpec.describe PurchaseForme, type: :model do
         @purchase_forme.valid?
         expect(@purchase_forme.errors.full_messages).to include("Shipping area must be other than 1")
       end
+      it "都道府県についての情報が空では登録できない" do
+        @purchase_forme.shipping_area_id = nil
+        @purchase_forme.valid?
+        expect(@purchase_forme.errors.full_messages).to include("Shipping area can't be blank", "Shipping area is not a number")
+      end
       it "市区町村が空では登録できないこと" do
         @purchase_forme.municipalities = nil
         @purchase_forme.valid?
@@ -63,12 +68,12 @@ RSpec.describe PurchaseForme, type: :model do
         expect(@purchase_forme.errors.full_messages).to include("Phone number Too long too short,is invalid")
       end
       it "user_idが空では登録できないこと" do
-        @purchase_forme.user_id = nil
+        @purchase_forme.user = nil
         @purchase_forme.valid?
         expect(@purchase_forme.errors.full_messages).to include("User can't be blank")
       end
       it "item_idが空では登録できないこと" do
-        @purchase_forme.item_id = nil
+        @purchase_forme.item = nil
         @purchase_forme.valid?
         expect(@purchase_forme.errors.full_messages).to include("Item can't be blank")
       end
